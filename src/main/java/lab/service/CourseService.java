@@ -39,7 +39,7 @@ public class CourseService {
                     " LEFT JOIN USER ON teachercourse.teacherId=user.userId where 1=1";
 
             sql = "SELECT teacherCourse.id,course.courseName,course.courseNumber,course.id as courseId,user.userName,course.term,teacherCourse.addTime" +
-                    " ,user.userId FROM teachercourse LEFT JOIN course ON teachercourse.courseId=course.id " +
+                    " ,teacherCourse.remark,user.userId FROM teachercourse LEFT JOIN course ON teachercourse.courseId=course.id " +
                     " LEFT JOIN USER ON teachercourse.teacherId=user.userId where 1=1";
 
         }else if((cos.getType()).equals("student")){
@@ -48,7 +48,7 @@ public class CourseService {
                     " LEFT JOIN teacherCourse ON studentCourse.teacherCourseId=teacherCourse.id" +
                     " LEFT JOIN course ON teacherCourse.courseId=course.id" +
                     " LEFT JOIN USER ON studentCourse.studentId=user.userId  where 1=1";
-            sql = "SELECT studentCourse.id,course.courseName,course.courseNumber,course.id as courseId,user.userName,course.term,studentCourse.addTime ,user.userId FROM " +
+            sql = "SELECT studentCourse.id,course.courseName,course.courseNumber,course.id as courseId,user.userName,course.term,studentCourse.addTime ,teacherCourse.remark,user.userId FROM " +
                     " (SELECT studentCourse.id,studentCourse.studentId,studentCourse.teacherCourseId,studentCourse.addTime FROM studentCourse) AS studentCourse" +
                     " LEFT JOIN teacherCourse ON studentCourse.teacherCourseId=teacherCourse.id" +
                     " LEFT JOIN course ON teacherCourse.courseId=course.id" +
@@ -57,8 +57,11 @@ public class CourseService {
         }else if((cos.getType()).equals("admin")){
             sqlTotal = "select count(*) as id from course left join"+
                     " user on user.userId=course.userId where 1=1";
-            sql = "select course.id ,courseName,course.courseNumber,term,course.addTime,user.userName,user.userId from course left join" +
-                    " user on user.userId=course.userId where 1=1";
+//            sql = "select course.id ,courseName,course.courseNumber,term,course.addTime,user.userName,user.userId from course left join" +
+//                    " user on user.userId=course.userId where 1=1";
+            sql = "select course.id ,courseName,course.courseNumber,term,course.addTime,user.userName,user.userId,teacherCourse.remark from course \n" +
+                    "LEFT JOIN teacherCourse ON teacherCourse.courseId=course.id\n" +
+                    "left join user on user.userId=course.userId where 1=1";
         }
 
         if(null != cos.getUserName() && !cos.getUserName().equals("")){
@@ -94,6 +97,7 @@ public class CourseService {
                     c.setCourseId(rs.getInt("courseId"));
                 }
                 c.setTerm(rs.getString("term"));
+                c.setRemark(rs.getString("remark"));
                 c.setUserId(rs.getString("userId"));
                 c.setUserName(rs.getString("userName"));
                 al.add(c);
@@ -135,7 +139,7 @@ public class CourseService {
         if(cos.getType().equals("student")){
             sqlTotal = "SELECT count(*) as taskName FROM studentcourse  WHERE studentcourse.studentId="+"'"+cos.getUserId()+"'";
 
-            sql = "SELECT studentcourse.id,teachercourse.id AS teacherCourseId ,course.id as courseId,course.courseName,course.courseNumber,course.term,user.userName,studentcourse.addTime FROM " +
+            sql = "SELECT studentcourse.id,teacherCourse.remark,teachercourse.id AS teacherCourseId ,course.id as courseId,course.courseName,course.courseNumber,course.term,user.userName,studentcourse.addTime FROM " +
                     " (SELECT studentcourse.id,studentcourse.addTime,studentcourse.teacherCourseId FROM studentcourse WHERE studentcourse.studentId="+"'"+cos.getUserId()+"'"+" LIMIT ?,?) AS studentcourse" +
                     " LEFT JOIN teachercourse ON studentcourse.teacherCourseId=teacherCourse.id" +
                     " LEFT JOIN USER ON user.userId=teachercourse.teacherId" +
@@ -146,7 +150,7 @@ public class CourseService {
                     " FROM teachercourse LEFT JOIN course ON teachercourse.courseId=course.id " +
                     " WHERE teachercourse.teacherId="+"'"+cos.getUserId()+"'";
 
-            sql = "SELECT teacherCourse.id,course.id AS courseId,course.courseName,course.courseNumber,course.term,teacherCourse.addTime" +
+            sql = "SELECT teacherCourse.id,teacherCourse.remark,course.id AS courseId,course.courseName,course.courseNumber,course.term,teacherCourse.addTime" +
                     " FROM teachercourse LEFT JOIN course ON teachercourse.courseId=course.id" +
                     " WHERE teachercourse.teacherId="+"'"+cos.getUserId()+"'";
         }
@@ -180,6 +184,7 @@ public class CourseService {
                     c.setTeacherCourseId(rs.getInt("teacherCourseId"));
                     c.setTerm(rs.getString("term"));
                     c.setUserName(rs.getString("userName"));
+                    c.setRemark(rs.getString("remark"));
                     al.add(c);
                 }
             }else{
@@ -191,6 +196,7 @@ public class CourseService {
                     c.setId(rs.getInt("id"));
                     c.setCourseId(rs.getInt("courseId"));
                     c.setTerm(rs.getString("term"));
+                    c.setRemark(rs.getString("remark"));
                     al.add(c);
                 }
             }

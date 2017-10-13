@@ -12,27 +12,27 @@ import java.sql.SQLException;
 
 
 public class CourseService {
+
     /**
-     * 得到教师授课数量
+     * 更新老师课程备注
      *
      * @param cos
      * @return
      */
-    public int getCourseNum(Course cos) {
+    public boolean updateCourseById(Course cos) {
+        System.out.println(cos);
         Connection conn = null;
         PreparedStatement ps = null;
-        ResultSet rs;
-        int result = 0;
+        boolean result = false;
         try {
-            // 查询老师选择这门课的数量
-            String sql = " SELECT count(*) as rowCount FROM teacherCourse where courseId=? and teacherId=?";
+            String sql = "UPDATE  `teachercourse` SET `remark` = ? WHERE `id` = ?";
             conn = DbUtil.getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, cos.getCourseId());
-            ps.setString(2, cos.getUserId());
-            rs = ps.executeQuery();
-            rs.next();
-            result = rs.getInt("rowCount");
+            ps.setString(1,cos.getRemark() );
+            ps.setInt(2, cos.getId());
+            if (ps.executeUpdate() > 0) {
+                result = true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -55,7 +55,7 @@ public class CourseService {
         try {
 //            // 查询老师选择这门课的数量
 //            String sql = "SELECT count(*) as rowCount FROM teacherCourse where courseId=? and teacherId=?";
-//            conn = DbUtil.getConnection();
+            conn = DbUtil.getConnection();
 //            ps = conn.prepareStatement(sql);
 //            ps.setInt(1, cos.getCourseId());
 //            ps.setString(2, cos.getUserId());

@@ -22,8 +22,7 @@ public class Course {
 	//课程编号
 	private String courseNumber;
 
-	private String classNumber;
-	
+	private String remark;
 	public String getCourseNumber() {
 		return courseNumber;
 	}
@@ -133,11 +132,36 @@ public class Course {
 		this.teacherCourseId = teacherCourseId;
 	}
 
-	public String  getClassNumber() {
-		return classNumber;
+	public String getRemark() {
+		return remark;
 	}
 
-	public void setClassNumber(String classNumber) {
-		this.classNumber = classNumber;
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	@Override
+	public String toString() {
+		return "Course{" +
+				"page=" + page +
+				", rows=" + rows +
+				", sort='" + sort + '\'' +
+				", order='" + order + '\'' +
+				", id=" + id +
+				", studentCourseId=" + studentCourseId +
+				", teacherCourseId=" + teacherCourseId +
+				", courseId=" + courseId +
+				", teacherCourseDir='" + teacherCourseDir + '\'' +
+				", courseName='" + courseName + '\'' +
+				", term='" + term + '\'' +
+				", userName='" + userName + '\'' +
+				", addTime='" + addTime + '\'' +
+				", ids='" + ids + '\'' +
+				", courseIds='" + courseIds + '\'' +
+				", type='" + type + '\'' +
+				", userId='" + userId + '\'' +
+				", courseNumber='" + courseNumber + '\'' +
+				", remark='" + remark + '\'' +
+				'}';
 	}
 }

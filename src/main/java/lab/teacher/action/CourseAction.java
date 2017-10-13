@@ -15,15 +15,6 @@ public class CourseAction extends ActionSupport implements ModelDriven<Course> {
     private static final long serialVersionUID = 1L;
     private Course cos = new Course();
 
-    public String getCourseNum() {
-        CourseService cs = new CourseService();
-        try {
-            JsonUtil.toJson(cs.getCourseNum(cos));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     /*
      * 教师根据课程id添加自己的实验课程
@@ -61,6 +52,21 @@ public class CourseAction extends ActionSupport implements ModelDriven<Course> {
         return null;
     }
 
+    /**
+     * 老师更新课程备注
+     *
+     * @return
+     */
+    public String updateCourseById() {
+        CourseService cs = new CourseService();
+        Gson g = new Gson();
+        try {
+            JsonUtil.writeJson(g.toJson(cs.updateCourseById(cos)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     public Course getModel() {
         return cos;
     }
