@@ -156,7 +156,7 @@
 							$('#teacher_teacherCourse_datagrid').datagrid('load');
 							$.messager.show({
 								title:'提示',
-								msg:'删除成功!'
+								msg:'删除成功!',
 							});
 						}else{
 							$.messager.show({

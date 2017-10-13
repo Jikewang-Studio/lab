@@ -76,14 +76,14 @@
 		var userId = '${sessionScope.user.userId}';
 		$.messager.confirm('请确认','你确定要添加实验课程吗?',function(data){
 			if(data){
-				$.ajax({
-					url: '${pageContext.request.contextPath}/teacher/Course_getCourseNum?courseId='+ courseId +'&userId='+userId,
-					type: 'GET',
-					dataType: 'json',
-					success: function(d){
-						console.log(d);
-						//如果是第一次添加
-						if(d == 0){
+				// $.ajax({
+				// 	url: '${pageContext.request.contextPath}/teacher/Course_getCourseNum?courseId='+ courseId +'&userId='+userId,
+				// 	type: 'GET',
+				// 	dataType: 'json',
+				// 	success: function(d){
+				// 		console.log(d);
+				// 		//如果是第一次添加
+				// 		if(d == 0){
 							$.ajax({
 								url:'${pageContext.request.contextPath}/teacher/Course_addCourseByCourseId',
 								type:'post',
@@ -96,20 +96,30 @@
 									if(d){
 										$.messager.show({
 											title:'温馨提示',
-											msg:'恭喜你,添加成功!'
+											msg:'添加成功!</br><p style="color:red">请在"我的任务栏"中查看</p>',
+											showType:'show',
+											style:{
+												left: ($(window).width()-238)/2,
+												top:($(window).height()-200)/2
+			  								}
 										});
 										$('#teacher_teacherCourse_datagrid').datagrid('load');
 									}else{
 										$.messager.show({
 											title:'温馨提示',
-											msg:'对不起,课程已添加!'
+											msg:'对不起,课程已添加!',
+											showType:'show',
+											style:{
+												left: ($(window).width()-238)/2,
+												top:($(window).height()-200)/2
+			  								}
 										});
 									}
 								}
 							});
-						}
+						//}
 						//如果是第二次添加
-						else if(d == 1){
+						/*else if(d == 1){
 							//教室第二次添加课程弹出对话框
 							$('#addCourseAgain').dialog({
 								title: '第二次添加',  
@@ -153,8 +163,8 @@
 								}]
 							})
 						}
-					}
-				})
+					}*/
+				//})
 			}else{
 				$.messager.show({
 					title:'温馨提示',
