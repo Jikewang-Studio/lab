@@ -33,9 +33,9 @@
 				width : 240,
 				align:'left'
 			},{
-				field : 'classNumber',
-				title : '班级',
-				width : 60,
+				field : 'remark',
+				title : '教学班备注',
+				width : 150,
 				align :  'left'
 			},{
 				field : 'courseNumber',

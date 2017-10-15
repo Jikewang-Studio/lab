@@ -16,12 +16,6 @@
 				showHeader:true,
 				singleSelect:true,
 				columns : [[{
-					//教师课程id
-					field : 'id',
-					align:'center',
-					width:60,
-					hidden:true
-				},{
 					//课程id
 					field : 'courseId',
 					align:'left',
@@ -33,10 +27,25 @@
 					width : 240,
 					align:'left'
 				},{
-					field : 'classNumber',
-					title : '班级',
-					width : 60,
-					align :  'left'
+					field : 'id',
+					title : '教学班编号',
+					width:60,
+					align:'left'
+				},{
+					field : 'remark',
+					title : '教学班备注（班级代码 专业等）',
+					width : 150,
+					align :  'left',
+					formatter: function(value,row){
+						var text;
+						if(value){
+							text = '修改';
+						}else{
+							text = '添加';
+							value = '';
+						}
+						return '<a href="#" style="text-decoration:none;color:#8080C0;" onclick="teacher_teacherCourse_remark(\''+row.id+'\',\''+value+'\',\''+text+'\')">'+ text + '</a>&nbsp&nbsp&nbsp' +value ;
+					}
 				},{
 					field : 'courseNumber',
 					title : '课程编号',
@@ -268,6 +277,41 @@
 		    	$(this).dialog('destroy');
 		    } 
 		});
+	}
+
+	//教师添加/修改教学班备注
+	function teacher_teacherCourse_remark(id,remark,text){
+		$("<div id='setRemark' />").dialog({
+		    title: text+'教学班备注',  
+		    width: 280,  
+		    height: 120, 
+		    closed: false,  
+		    cache: false,  
+		    content: '<p style="margin-top:20px"><lable>教学班备注：</lable><input type="text" id="remark" value="'+remark+'" /></p><button onclick="teacher_teacherCourse_updateRemark(\''+id+'\')" >确认</button>',
+		    modal: true ,
+		    onClose:function(){
+		    	$(this).dialog('destroy');
+		    } 
+		});
+	}
+	//确认添加/修改班级备注
+	function teacher_teacherCourse_updateRemark(id){
+		$.ajax({
+			url: '${pageContext.request.contextPath}/teacher/Course_updateCourseById',
+			type: 'post',
+			data: {
+				id: id,
+				remark: $('#remark').val()
+			},
+			success: function(data){
+				$.messager.show({
+					title:'温馨提示',
+					msg:'恭喜你,设置成功!'
+				});
+				$('#teacher_teacherCourse_datagrid').datagrid('load');
+				$("#setRemark").dialog('close');
+			}
+		})
 	}
 </script>
 

@@ -15,18 +15,19 @@
 			pageList:[20,50],
 			showHeader:true,
 			columns : [[{
-				field : 'id',
-				width:60,
-				checkbox:true
-			},{
 				field : 'courseName',
 				title : '实验课程',
 				width : 120,
 				align:'left'
 			},{
-				field : 'classNumber',
-				title : '班级',
-				width : 60,
+				field : 'id',
+				title : '教学班编号',
+				width:60,
+				align:'left'
+			},{
+				field : 'remark',
+				title : '教学班备注（班级代码 专业等）',
+				width : 150,
 				align :  'left'
 			},{
 				field : 'courseNumber',

@@ -33,10 +33,10 @@
 				}
 			}]],
 			columns : [[{
-				field : 'classNumber',
-				title : '班级',
-				width : 60,
-				align :  'left'
+				field : 'remark',
+				title : '教学班备注（班级代码 专业等）',
+				width : 80,
+				align :  'left',
 			},{
 				field : 'courseNumber',
 				title : '课程编号',
