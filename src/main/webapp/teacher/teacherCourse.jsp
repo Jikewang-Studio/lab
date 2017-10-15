@@ -34,7 +34,7 @@
 				},{
 					field : 'remark',
 					title : '教学班备注（班级代码 专业等）',
-					width : 150,
+					width : 160,
 					align :  'left',
 					formatter: function(value,row){
 						var text;

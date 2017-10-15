@@ -59,9 +59,8 @@ public class CourseService {
                     " user on user.userId=course.userId where 1=1";
 //            sql = "select course.id ,courseName,course.courseNumber,term,course.addTime,user.userName,user.userId from course left join" +
 //                    " user on user.userId=course.userId where 1=1";
-            sql = "select course.id ,courseName,course.courseNumber,term,course.addTime,user.userName,user.userId,teacherCourse.remark from course \n" +
-                    "LEFT JOIN teacherCourse ON teacherCourse.courseId=course.id\n" +
-                    "left join user on user.userId=course.userId where 1=1";
+            sql = "select course.id ,courseName,course.courseNumber,term,course.addTime,user.userName,user.userId from course \n" +
+                    "                    left join user on user.userId=course.userId where 1=1";
         }
 
         if(null != cos.getUserName() && !cos.getUserName().equals("")){
@@ -95,9 +94,9 @@ public class CourseService {
                 c.setId(rs.getInt("id"));
                 if(!cos.getType().equals("admin")){
                     c.setCourseId(rs.getInt("courseId"));
+                    c.setRemark(rs.getString("remark"));
                 }
                 c.setTerm(rs.getString("term"));
-                c.setRemark(rs.getString("remark"));
                 c.setUserId(rs.getString("userId"));
                 c.setUserName(rs.getString("userName"));
                 al.add(c);

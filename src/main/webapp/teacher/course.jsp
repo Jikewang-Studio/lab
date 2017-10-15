@@ -96,7 +96,7 @@
 									if(d){
 										$.messager.show({
 											title:'温馨提示',
-											msg:'添加成功!</br><p style="color:red">请在"我的任务栏"中查看</p>',
+											msg:'添加成功!</br><p style="color:red">请在"我的任务栏"中查看！</p>',
 											showType:'show',
 											style:{
 												left: ($(window).width()-238)/2,
