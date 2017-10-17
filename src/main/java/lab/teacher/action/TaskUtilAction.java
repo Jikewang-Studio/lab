@@ -1,22 +1,15 @@
 package lab.teacher.action;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Date;
-import java.util.UUID;
-
+import com.google.gson.Gson;
+import com.opensymphony.xwork2.ActionSupport;
 import lab.bean.Task;
 import lab.teacher.service.TaskIdCheckService;
 import lab.teacher.service.TaskService;
 import lab.util.FileUtil;
 import lab.util.JsonUtil;
 
-import com.google.gson.Gson;
-import com.opensymphony.xwork2.ActionSupport;
+import java.io.*;
+import java.util.UUID;
 
 public class TaskUtilAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
@@ -179,7 +172,12 @@ public class TaskUtilAction extends ActionSupport {
 		return null;
 	}
 
-	// 教师修改自己的实验指导书和任务名称
+	/**
+	 *
+	 * 教师修改自己的实验指导书和任务名称
+	 *
+	 * @return
+     */
 	public String updateTask() {
 		UUID uuid = UUID.randomUUID();
 		// 删除之前的实验指导书

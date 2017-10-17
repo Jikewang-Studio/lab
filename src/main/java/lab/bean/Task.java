@@ -19,6 +19,7 @@ public class Task {
 	private String workDir;
 	private String fileNameF;//最终的文件名
 	private String uuid;
+	private int isClosed;
 	
 	public int getPage() {
 		return page;
@@ -111,6 +112,12 @@ public class Task {
 	public String getFileNameF(){
 		return fileNameF;
 	}
-	
 
+	public int getIsClosed() {
+		return isClosed;
+	}
+
+	public void setIsClosed(int isClosed) {
+		this.isClosed = isClosed;
+	}
 }

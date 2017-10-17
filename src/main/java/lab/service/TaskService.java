@@ -1,5 +1,8 @@
 package lab.service;
 
+import lab.bean.Task;
+import lab.util.DbUtil;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,20 +12,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import lab.bean.Task;
-import lab.util.DbUtil;
-
 public class TaskService {
-	/*
+	/**
 	 * 通过教师课程id获取实验任务
-	 * */
+	 *
+	 * @param tk
+	 * @return
+	 * @throws SQLException
+     */
 	public Map<String, Object> getTaskByTeacherCourseId(Task tk) throws SQLException {
 		List<Task> al = new ArrayList<Task>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Connection conn = null;
-		String sql = "SELECT task.id,task.fileNameF,task.taskName,task.workDir,task.teacherCourseId,task.url,task.addTime "
+		String sql = "SELECT task.id,task.fileNameF,task.taskName,task.workDir,task.teacherCourseId,task.url,task.addTime,task.isClosed "
 				+ "FROM task LEFT JOIN teachercourse ON teachercourse.id=task.teacherCourseId "
 				+ "WHERE teachercourse.id=" + tk.getTeacherCourseId()+
 				" ORDER BY addTime desc";
@@ -39,6 +43,7 @@ public class TaskService {
 				t.setTeacherCourseId(rs.getInt("teacherCourseId"));
 				t.setFileNameF(rs.getString("fileNameF"));
 				t.setUrl(rs.getString("url").replaceAll("\\\\", "\\\\\\\\"));
+				t.setIsClosed(rs.getInt("isClosed"));
 				al.add(t);
 			}
 			map.put("rows", al);
