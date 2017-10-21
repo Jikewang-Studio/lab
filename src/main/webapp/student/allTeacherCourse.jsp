@@ -14,14 +14,14 @@
 			showHeader:true,
 			singleSelect:true,
 			columns : [[{
-				field : 'id',
-				width:60,
-				hidden:true,
-				align:'center'
-			},{
 				field : 'courseName',
 				title : '实验课程',
 				width : 240,
+				align:'left'
+			},{
+				field : 'id',
+				title : '教学班编号',
+				width:60,
 				align:'left'
 			},{
 				field : 'remark',

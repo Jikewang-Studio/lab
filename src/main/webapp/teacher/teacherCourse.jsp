@@ -94,6 +94,7 @@
 	                    	{field:'fileNameF',
 	                    		title:'实验任务附件',width:100,align:'left',
 	                        	formatter:function(value,row,index){
+
 	                        		if (value === undefined) {
 	                        			value = ' ';
 	                        		}
@@ -102,9 +103,17 @@
 	                    	{field:'addTime',title:'发布时间',width:50,align:'left'},
 	                    	{field:'url',width:60,align:'left',hidden:true},
 	                    	{field:'workDir',width:50,align:'left',hidden:true},
-	                    	{field:'getWork',title:'学生作业',width:50,align:'left',
+	                    	{field:'getWork',title:'学生作业',width:80,align:'left',
 	                    		formatter:function(value,row,index){
-	            					return '<span style="cursor:pointer;color:#8080C0;" onclick="teacher_teacherCourse_getWork(\''+row.id+'\',\''+row.taskName+'\',\''+courseName+'\',\'作业\',\'studentWork\');">查看作业</span>';
+	                    			var text = '';
+	                    			if(row.isClosed == 0){
+	                    				text = '关闭任务上传';
+	                    			}else{
+	                    				text = '开启任务上传'
+	                    			}
+	            					return '<span style="cursor:pointer;color:#8080C0;" onclick="teacher_teacherCourse_getWork(\''+row.id+'\',\''+row.taskName+'\',\''+courseName+'\',\'作业\',\'studentWork\');">查看作业</span>\
+	            					 	&nbsp;&nbsp;&nbsp;&nbsp;<span style="cursor:pointer;color:#8080C0;" id="toggleWork" onclick="teacher_teacherCourse_toggleWork(\''+text+'\',\''+row.id+'\')">'+text+'</span>\
+	            					';
 	            				}
 	                    	},
 	                    	{field:'taskCl',title:'任务处理',width:60,align:'left',
@@ -144,6 +153,33 @@
 				closable : true
 			});
 		}
+	}
+
+	//开启/关闭作业上传
+	function teacher_teacherCourse_toggleWork(text,id){
+		var isClosed;
+		var toggleText;
+		if(text == '关闭任务上传'){
+			isClosed = 1;
+			toggleText = '开启任务上传';
+		}else{
+			isClosed = 0;
+			toggleText = '关闭任务上传';
+		}
+		var e = $(event.target);
+		$.ajax({
+			url: '${pageContext.request.contextPath}/teacher/Task_updateTaskUploadById',
+			type: 'POST',
+			data:{
+				id: id,
+				isClosed: isClosed
+			},
+			success: function(data){
+				e.html(toggleText);
+				e.attr('onclick','teacher_teacherCourse_toggleWork(\''+toggleText+'\',\''+id+'\')');
+			}
+		})
+		
 	}
 		
 	//教师删除自己添加的实验课程(删除课程，任务，实验指导书，学生作业)

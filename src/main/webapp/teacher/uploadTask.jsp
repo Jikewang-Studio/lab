@@ -117,16 +117,15 @@
 				    			type:'post',
 				    			data:obj,
 				    			dataType:'json',
-				    			success:function(b){	
-				    						    				
-				    				
-				    				    				$.ajax({
-						url : '${pageContext.request.contextPath}/Course_getCourseByUserId?type=teacher&userId='+userId,    					type:'post',
-    					dataType:'json'
+				    			success:function(b){		
+				    				/*$.ajax({
+										url : '${pageContext.request.contextPath}/Course_getCourseByUserId?type=teacher&userId='+userId,    		
+										type:'post',
+    									dataType:'json'
     			
-					});
-					alert(b);
-				    				}
+									});*/
+									alert(b);
+				    			}
 				    	 });
 		    		 }
 		    	 }

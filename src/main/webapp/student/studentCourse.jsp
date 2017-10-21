@@ -102,7 +102,7 @@
                         {field:'addTime',title:'发布时间',width:60,align:'left'},
                         {field:'uploadWork',title:'作业处理',width:100,align:'left',
                         	formatter:function(value,row,index){
-            					return '<span style="cursor:pointer;color:#8080C0;" onclick="student_studentWork_uploadWork(\''+studentCourseId+'\',\''+row.workDir+'\',\''+row.id+'\');">上传作业</span>'+
+            					return '<span style="cursor:pointer;color:#8080C0;" onclick="student_studentWork_uploadWork(\''+studentCourseId+'\',\''+row.workDir+'\',\''+row.id+'\',\''+row.isClosed+'\');">上传作业</span>'+
             					'<span style="cursor:pointer;color:#8080C0;margin-left:14px;" onclick="student_studentCourse_getWork(\''+row.id+'\');">查看作业</span>';
             				}
                         }
@@ -158,18 +158,27 @@
 	}
 	
 	//学生上传作业
-	function student_studentWork_uploadWork(studentCourseId,workDir,taskId){
-		
-		var url = '${pageContext.request.contextPath}/student/uploadWork.jsp?workDir='+workDir+'&studentCourseId='+studentCourseId+'&taskId='+taskId;
-		$("<div/>").dialog({
-		    title: '上传作业',  
-		    width: 480,  
-		    height: 240,  
-		    closed: false,  
-		    cache: false,  
-		    content: '<iframe src="' + encodeURI(url) + '" frameborder="0" style="border:0;width:100%;height:100%;"></iframe>',
-		    modal: true  
-		});
+	function student_studentWork_uploadWork(studentCourseId,workDir,taskId,isClosed){
+
+		if(isClosed == 1){
+			$("<div/>").dialog({
+				title: '上传作业',  
+				width: 480,  
+				height: 240,
+				content:"老师已关闭此次任务的上传"
+			});
+		}else{
+			var url = '${pageContext.request.contextPath}/student/uploadWork.jsp?workDir='+workDir+'&studentCourseId='+studentCourseId+'&taskId='+taskId;
+			$("<div/>").dialog({
+				title: '上传作业',  
+				width: 480,  
+				height: 240,  
+				closed: false,  
+				cache: false,  
+				content: '<iframe src="' + encodeURI(url) + '" frameborder="0" style="border:0;width:100%;height:100%;"></iframe>',
+				modal: true  
+			});
+		}	
 	}
 	//学生查看自己的作业
 	function student_studentCourse_getWork(id){
