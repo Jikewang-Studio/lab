@@ -6,6 +6,7 @@ public class Work {
 	private String sort;
 	private String order;
 	private int studentCourseId;
+	private int teacherCourseId;
 	private int id;
 	private int taskId;
 	private String userId;
@@ -44,6 +45,15 @@ public class Work {
 	public void setStudentCourseId(int studentCourseId) {
 		this.studentCourseId = studentCourseId;
 	}
+
+	public int getTeacherCourseId() {
+		return teacherCourseId;
+	}
+
+	public void setTeacherCourseId(int teacherCourseId) {
+		this.teacherCourseId = teacherCourseId;
+	}
+
 	public int getId() {
 		return id;
 	}

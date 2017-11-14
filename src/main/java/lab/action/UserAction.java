@@ -25,8 +25,9 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		Map<String, Object> map = ActionContext.getContext().getSession();
 		User u = us.login(user);
 		map.put("user", u);
+		System.out.println(u.getUserId()+" : "+u.getUserName()+"登录了");
 		try {
-			JsonUtil.writeJson(gson.toJson(us.login(user)));
+			JsonUtil.writeJson(gson.toJson(u));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

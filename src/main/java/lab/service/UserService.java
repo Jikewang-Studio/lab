@@ -40,7 +40,6 @@ public class UserService {
                     u.setType("管理员");
                 }
             }
-            System.out.println(u.toString());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
