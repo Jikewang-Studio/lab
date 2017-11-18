@@ -19,6 +19,7 @@ public class AuthFilter implements Filter {
 		HttpSession session = request.getSession();
 		//获得请求的资源路径
 		//成功过滤
+		System.out.println("lab:"+session.getId());
 		if(session.getAttribute("user") != null){
 			chain.doFilter(req, res);
 		}else{

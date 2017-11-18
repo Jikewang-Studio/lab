@@ -111,7 +111,7 @@ public class TaskService {
 
     /**
      * 教师关闭任务上传
-     * 0为关闭,1为打开，默认打开
+     * 1为关闭,0为打开，默认打开
      *
      * @param tk
      * @return

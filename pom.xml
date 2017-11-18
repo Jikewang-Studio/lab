@@ -22,11 +22,20 @@
 
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <url>http://172.22.4.2:80/manager/text</url>
+                    <!--<url>http://127.0.0.1:80/manager/text</url>-->
+                    <url>http://172.22.4.16:80/manager/text</url>
                     <username>admin</username>
                     <password>password</password>
                     <update>true</update>
@@ -193,6 +202,7 @@
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>RELEASE</version>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>
