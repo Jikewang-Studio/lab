@@ -15,8 +15,9 @@
 		window.onload = function() {
 		//修改任务
 		var oTask = document.getElementById('taskName');
-		//var oTaskName = "<%=new String(request.getParameter("taskName").getBytes("ISO-8859-1"),"utf-8")%>";
-		var oTaskName = "<%=request.getParameter("taskName")%>";
+		var oTaskName = "<%=new String(request.getParameter("taskName").getBytes("ISO-8859-1"),"utf-8")%>";
+		//var oTaskName = "<%=request.getParameter("taskName")%>";
+		//console.log(oTaskName);
 		if(oTaskName === "undefined" || oTaskName === null || oTaskName === ""){
 			oTask.value = "";
 		}else{

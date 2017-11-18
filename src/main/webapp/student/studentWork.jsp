@@ -2,6 +2,7 @@
 <script type="text/javascript">
 	var userId = '${sessionScope.user.userId }';
 	var taskId = <%=request.getParameter("taskId")%>;
+	var isClosed = <%=request.getParameter("isClosed")%>;
 	$(function(){
 		$("#student_studentWork_datagrid").datagrid({
 			url : '${pageContext.request.contextPath}/student/Work_getWorkByTaskId?userId='+userId+
@@ -71,29 +72,33 @@
 	function student_studentWork_deleteWork(id,url){
 		$.messager.confirm('请确认','你确定要删除该实验课程吗?',function(data){
 			if(data){
-				$.ajax({
-					url:'${pageContext.request.contextPath}/student/Work_deleteWorkByWorkId',
-					data:{
-						id:id,
-						url:url
-					},
-					dataType:'json',
-					type:'post',
-					success:function(d){
-						if(d){
-							$('#student_studentWork_datagrid').datagrid('load');
-							$.messager.show({
-								title:'提示',
-								msg:'恭喜你,删除成功!'
-							});
-						}else{
-							$.messager.show({
-								title:'提示',
-								msg:'对不起,删除失败!'
-							});
+				if(isClosed == 1){
+					$.messager.alert('提示','老师已经关闭课程上传，不可删除!');
+				}else{
+					$.ajax({
+						url:'${pageContext.request.contextPath}/student/Work_deleteWorkByWorkId',
+						data:{
+							id:id,
+							url:url
+						},
+						dataType:'json',
+						type:'post',
+						success:function(d){
+							if(d){
+								$('#student_studentWork_datagrid').datagrid('load');
+								$.messager.show({
+									title:'提示',
+									msg:'恭喜你,删除成功!'
+								});
+							}else{
+								$.messager.show({
+									title:'提示',
+									msg:'对不起,删除失败!'
+								});
+							}
 						}
-					}
-				});
+					});
+				}
 			}else{
 				$.messager.show({
 					title:'提示',

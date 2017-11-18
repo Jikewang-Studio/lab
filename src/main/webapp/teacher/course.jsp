@@ -48,7 +48,7 @@
 				width : 100,
 				align:'left',
 				formatter:function(value,row,index){
-					return '<span style="cursor:pointer;color:#8080C0;" onclick="teacher_course_addCourse(\''+row.id+'\');">添加课程</span>';
+					return '<span style="cursor:pointer;color:#8080C0;" onclick="teacher_course_addCourse();">添加课程</span>';
 				}
 			}]],
 			toolbar:'#teacher_course_toolbar'

@@ -81,7 +81,8 @@
 	        	},
 	       		onExpandRow: function(index,row){
 	       			var courseName = row.courseName;
-	            	$('#teacher_teacherCourse-'+index).datagrid({
+					var teacherCourseId = row.id;
+					$('#teacher_teacherCourse-'+index).datagrid({
 	                	url:'${pageContext.request.contextPath}/Task_getTaskByTeacherCourseId?teacherCourseId='+row.id,
 	                	fitColumns:true,
 	                	singleSelect:true,
@@ -103,7 +104,7 @@
 	                    	{field:'addTime',title:'发布时间',width:50,align:'left'},
 	                    	{field:'url',width:60,align:'left',hidden:true},
 	                    	{field:'workDir',width:50,align:'left',hidden:true},
-	                    	{field:'getWork',title:'学生作业',width:80,align:'left',
+	                    	{field:'getWork',title:'学生作业',width:130,align:'center',
 	                    		formatter:function(value,row,index){
 	                    			var text = '';
 	                    			if(row.isClosed == 0){
@@ -113,6 +114,7 @@
 	                    			}
 	            					return '<span style="cursor:pointer;color:#8080C0;" onclick="teacher_teacherCourse_getWork(\''+row.id+'\',\''+row.taskName+'\',\''+courseName+'\',\'作业\',\'studentWork\');">查看作业</span>\
 	            					 	&nbsp;&nbsp;&nbsp;&nbsp;<span style="cursor:pointer;color:#8080C0;" id="toggleWork" onclick="teacher_teacherCourse_toggleWork(\''+text+'\',\''+row.id+'\')">'+text+'</span>\
+										 &nbsp;&nbsp;&nbsp;&nbsp;<span style="cursor:pointer;color:#8080C0;" id="toggleWork" onclick="teacher_teacherCourse_notWork(\''+row.id+'\',\''+teacherCourseId+'\')">未提交作业名单</span>\
 	            					';
 	            				}
 	                    	},
@@ -181,6 +183,31 @@
 		})
 		
 	}
+
+	//查看未提交作业名单
+	function teacher_teacherCourse_notWork(id,teacherCourseId){
+		// $.ajax({
+		// 	url:'${pageContext.request.contextPath}/teacher/Work_getUnfinishedStudentByTaskId?teacherCourseId='+teacherCourseId+'&taskId='+id, 
+		// 	type: 'get',
+		// 	dataType: 'json',
+		// 	success: function(data){
+		// 		console.log(data);
+		// 	}
+		// })
+		var url='${pageContext.request.contextPath}/teacher/unfinishedStudent.jsp?taskId='+id+'&teacherCourseId='+teacherCourseId;
+		$("<div/>").dialog({
+			title: '未提交作业名单',  
+			width: 480,  
+		 	height: 320,  
+			closed: false,  
+			cache: false,  
+			content: '<iframe src="' + encodeURI(url) + '" frameborder="0" style="border:0;width:100%;height:100%;"></iframe>',
+		    modal: true,
+			onClose:function(){
+				$(this).dialog('destroy');
+			}
+		});
+	}
 		
 	//教师删除自己添加的实验课程(删除课程，任务，实验指导书，学生作业)
 	function teacher_teacherCourse_deleteCourse(id,courseId){
@@ -223,7 +250,7 @@
 	
 	//教师删除任务(删除任务，删除指导书，删除学生作业)
 	function teacher_teacherCourse_deleteTask(id,url,workDir){
-		$.messager.confirm('请确认','删除将会删除学生作业,你确定吗?',function(data){
+		$.messager.confirm('请确认','删除将会删除所有学生作业，无法撤销<br /><p style="color:red;font-size:24px;font-weight:bolder;text-align:center;">请慎重！</p><p style="text-align:center">你确定吗?</p>',function(data){
 			if(data){
 				$.ajax({
 					url:'${pageContext.request.contextPath}/teacher/Task_deleteTaskById',

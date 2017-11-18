@@ -103,7 +103,7 @@
                         {field:'uploadWork',title:'作业处理',width:100,align:'left',
                         	formatter:function(value,row,index){
             					return '<span style="cursor:pointer;color:#8080C0;" onclick="student_studentWork_uploadWork(\''+studentCourseId+'\',\''+row.workDir+'\',\''+row.id+'\',\''+row.isClosed+'\');">上传作业</span>'+
-            					'<span style="cursor:pointer;color:#8080C0;margin-left:14px;" onclick="student_studentCourse_getWork(\''+row.id+'\');">查看作业</span>';
+            					'<span style="cursor:pointer;color:#8080C0;margin-left:14px;" onclick="student_studentCourse_getWork(\''+row.id+'\',\''+row.isClosed+'\');">查看作业</span>';
             				}
                         }
                     ]],
@@ -181,8 +181,8 @@
 		}	
 	}
 	//学生查看自己的作业
-	function student_studentCourse_getWork(id){
-		var url = '${pageContext.request.contextPath}/student/studentWork.jsp?taskId='+id;
+	function student_studentCourse_getWork(id,isClosed){
+		var url = '${pageContext.request.contextPath}/student/studentWork.jsp?isClosed='+ isClosed +'&taskId='+id;
 		$("<div/>").dialog({
 		    title: '作业信息',  
 		    width: 734,  
