@@ -11,7 +11,7 @@ public class DataSource {
     private static String url = "jdbc:mysql://172.22.4.16:3306/lab?useUnicode=true&characterEncoding=utf-8&useSSL=false";
 //    private static String url = "jdbc:mysql://127.0.0.1:3306/lab?useUnicode=true&characterEncoding=utf-8&useSSL=false";
     private static String user = "root";
-    //	private static String password = "lab123";
+//    private static String password = "lab123";
     private static String password = "19901009";
 
     private static int initCount = 30;

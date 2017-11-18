@@ -17,10 +17,6 @@
 		var oTask = document.getElementById('taskName');
 		var oTaskName = "<%=new String(request.getParameter("taskName").getBytes("ISO-8859-1"),"utf-8")%>";
 		//var oTaskName = "<%=request.getParameter("taskName")%>";
-<<<<<<< HEAD
-		//console.log(oTaskName);
-=======
->>>>>>> a315862e3c15915937bd2d083073044897777d5d
 		if(oTaskName === "undefined" || oTaskName === null || oTaskName === ""){
 			oTask.value = "";
 		}else{
