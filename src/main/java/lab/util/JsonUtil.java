@@ -7,12 +7,11 @@ import org.apache.struts2.ServletActionContext;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
 
 
 /**
- *
  * Json格式工具，还未完成
- *
  */
 public class JsonUtil {
 
@@ -49,4 +48,17 @@ public class JsonUtil {
         out.close();
     }
 
+    /**
+     * 把json字符串变成List
+     * params: new TypeToken<List<yourbean>>(){}.getType(),
+     * new TypeToken<HashMap<String,Object>>() {}.getType()
+     * 传入这个参数,可以变成map
+     *
+     * @param json
+     * @param type new TypeToken<List<yourbean>>(){}.getType()
+     * @return
+     */
+    public static <T> T fromJson(String json, Type type) {
+        return gson.fromJson(json, type);
+    }
 }

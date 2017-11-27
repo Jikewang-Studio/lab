@@ -1,16 +1,13 @@
 package lab.teacher.action;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
+import com.google.gson.Gson;
+import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
 import lab.bean.User;
 import lab.teacher.service.UserService;
 import lab.util.JsonUtil;
 
-import com.google.gson.Gson;
-import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
+import java.io.IOException;
 
 public class UserAction extends ActionSupport implements ModelDriven<User>{
 

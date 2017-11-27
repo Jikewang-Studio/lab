@@ -16,9 +16,11 @@ public class CourseAction extends ActionSupport implements ModelDriven<Course> {
     private Course cos = new Course();
 
 
-    /*
+    /**
      * 教师根据课程id添加自己的实验课程
-     * */
+     *
+     * @return
+     */
     public String addCourseByCourseId() {
         CourseService cs = new CourseService();
         Gson g = new Gson();
@@ -38,9 +40,11 @@ public class CourseAction extends ActionSupport implements ModelDriven<Course> {
         return null;
     }
 
-    /*
+    /**
      * 教师根据教师课程id删除自己添加的实验课程
-     * */
+     *
+     * @return
+     */
     public String deleteCourseByTeacherCourseId() {
         CourseService cs = new CourseService();
         Gson g = new Gson();
@@ -67,6 +71,23 @@ public class CourseAction extends ActionSupport implements ModelDriven<Course> {
         }
         return null;
     }
+
+    /**
+     * 老师更新课程备注
+     *
+     * @return
+     */
+    public String getStudentsById() {
+        CourseService cs = new CourseService();
+        Gson g = new Gson();
+        try {
+            JsonUtil.writeJson(g.toJson(cs.getStudentsById(cos)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public Course getModel() {
         return cos;
     }
