@@ -63,7 +63,6 @@ public class NotificationService {
             while (rs.next()) {
                 Notification notification = new Notification();
                 notification.setId(rs.getInt("id"));
-                System.out.println();
                 notification.setTeacherId(rs.getString("teacherId"));
                 notification.setStudentId(rs.getString("studentId"));
                 notification.setContent(rs.getString("content"));

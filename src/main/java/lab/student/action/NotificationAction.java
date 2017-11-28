@@ -60,6 +60,7 @@ public class NotificationAction extends ActionSupport {
 
     /**
      * 学生阅读通知
+     *
      */
     public String readNotification() {
         NotificationService notificationService = new NotificationService();
