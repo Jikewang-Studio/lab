@@ -6,7 +6,6 @@ import lab.util.DbUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.List;
 
 /**
  * @author 李文浩
@@ -36,7 +35,7 @@ public class NotificationService {
         return result;
     }
 
-    public boolean pushNotificationBatch(List<Notification> notifications) {
+    public boolean pushNotificationBatch(Notification notification, String[] studentIds) {
         Connection conn = null;
         PreparedStatement ps = null;
         boolean result = false;
@@ -46,9 +45,9 @@ public class NotificationService {
             conn = DbUtil.getConnection();
             conn.setAutoCommit(false);
             ps = conn.prepareStatement(sql);
-            for (Notification notification : notifications) {
+            for (String studentId : studentIds) {
                 ps.setString(1, notification.getTeacherId());
-                ps.setString(2, notification.getStudentId());
+                ps.setString(2, studentId);
                 ps.setString(3, notification.getContent());
                 ps.addBatch();
             }
