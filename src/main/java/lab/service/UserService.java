@@ -28,6 +28,7 @@ public class UserService {
             ps = conn.prepareStatement(sql);
             ps.setString(1, user.getUserId());
             ps.setString(2, user.getPassword());
+            System.out.println(ps);
             rs = ps.executeQuery();
             if (rs.next()) {
                 u.setUserId(rs.getString("userId"));
