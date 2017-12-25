@@ -61,8 +61,10 @@
 	function teacher_studentWork_download(){
 		var rows = $('#teacher_studentWork_datagrid').datagrid('getSelections');
 		//javaScript获取数字的正则表达式
-		var taskName = '<%=request.getParameter("taskName") %>';
-		var urls = [];
+		//不将iso转码会乱码
+        var taskName = "<%=new String(request.getParameter("taskName").getBytes("ISO-8859-1"),"utf-8")%>";
+        //var taskName = '<%=request.getParameter("taskName") %>';
+        var urls = [];
 		if(rows.length == 0){
 			$.messager.show({
 				title:'提示',
